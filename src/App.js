@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import { Grid, Box } from "@chakra-ui/react"
+import Home from "./sections/home";
+
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        fontFamily: 'Raleway',
+      },
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Grid
+        h="100vh"
+        templateRows="repeat(4, 1fr)"
+        templateAreas={`
+          "home"
+          "about"
+          "projects"
+          "contact"
+        `}
+      >
+        <Home gridArea="home"/>
+        <Box gridArea="about" bg="purple.500" h="1000px"/>
+        <Box gridArea="projects" bg="red.500" h="1000px"/>
+        <Box gridArea="contact" bg="orange.500" h="1000px"/>
+      </Grid>
+    </ChakraProvider>
   );
 }
 
